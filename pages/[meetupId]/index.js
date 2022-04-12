@@ -19,27 +19,10 @@ function MeetupDetails(props) {
   );
 }
 
-export async function getStaticPaths() {
-  const client = await MongoClient.connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vtweq.mongodb.net/meetups?retryWrites=true&w=majority`
-  );
-  const db = client.db();
-
-  const meetupsCollection = db.collection("meetups");
-  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
-  client.close();
-
-  return {
-    fallback: "blocking",
-    paths: meetups.map((meetup) => ({
-      params: {
-        meetupId: meetup._id.toString(),
-      },
-    })),
-  };
-}
-
-export async function getStaticProps(context) {
+/**
+ * SSR: Server Side Rendering
+ */
+export async function getServerSideProps(context) {
   // fetch data for a single meetup
   const meetupId = context.params.meetupId;
   const client = await MongoClient.connect(
@@ -65,5 +48,56 @@ export async function getStaticProps(context) {
     },
   };
 }
+
+/**
+ * SSG: Server Side Generation
+ */
+/* export async function getStaticProps(context) {
+  // fetch data for a single meetup
+  const meetupId = context.params.meetupId;
+  const client = await MongoClient.connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vtweq.mongodb.net/meetups?retryWrites=true&w=majority`
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: ObjectId(meetupId),
+  });
+  client.close();
+
+  return {
+    props: {
+      meetupData: {
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        address: selectedMeetup.address,
+        description: selectedMeetup.description,
+        image: selectedMeetup.image,
+      },
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  const client = await MongoClient.connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vtweq.mongodb.net/meetups?retryWrites=true&w=majority`
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
+  client.close();
+
+  return {
+    fallback: "blocking",
+    paths: meetups.map((meetup) => ({
+      params: {
+        meetupId: meetup._id.toString(),
+      },
+    })),
+  };
+}
+*/
 
 export default MeetupDetails;

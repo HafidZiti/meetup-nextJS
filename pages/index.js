@@ -17,14 +17,34 @@ function HomePage(props) {
   );
 }
 
-// export async function getServerSideProps() {
-//   return {
-//     props: {
-//       meetups: FAKE_MEETUPS,
-//     },
-//   };
-// }
+/**
+ * SSR: Server Side Rendering
+ */
+export async function getServerSideProps() {
+  const client = await MongoClient.connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vtweq.mongodb.net/meetups?retryWrites=true&w=majority`
+  );
+  const db = client.db();
 
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find().toArray();
+  client.close();
+  return {
+    props: {
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        id: meetup._id.toString(),
+      })),
+    },
+  };
+}
+
+/**
+ * SSG: Server Side generation
+ */
+/*
 export async function getStaticProps() {
   const client = await MongoClient.connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vtweq.mongodb.net/meetups?retryWrites=true&w=majority`
@@ -46,5 +66,6 @@ export async function getStaticProps() {
     revalidate: 1,
   };
 }
+*/
 
 export default HomePage;
