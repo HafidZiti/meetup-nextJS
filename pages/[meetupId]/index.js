@@ -50,7 +50,7 @@ export async function getServerSideProps(context) {
 }
 
 /**
- * SSG: Server Side Generation
+ * SSG: Static Site Generation
  */
 /* export async function getStaticProps(context) {
   // fetch data for a single meetup

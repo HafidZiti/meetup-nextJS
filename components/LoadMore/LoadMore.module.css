@@ -1,0 +1,14 @@
+.btnContainer {
+  text-align: center;
+}
+
+.btn {
+  font: inherit;
+  cursor: pointer;
+  color: #070707;
+  border: 1px solid #000000;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  text-align: center;
+}
