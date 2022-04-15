@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { MongoClient, ObjectId } from "mongodb";
 import Head from "next/head";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
@@ -99,5 +100,9 @@ export async function getStaticPaths() {
   };
 }
 */
+
+MeetupDetails.propTypes = {
+  meetupData: PropTypes.object.isRequired,
+};
 
 export default MeetupDetails;

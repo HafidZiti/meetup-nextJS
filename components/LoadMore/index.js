@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./LoadMore.module.css";
 
 function LoadMore({ onClick, isLoading }) {
@@ -13,5 +14,10 @@ function LoadMore({ onClick, isLoading }) {
     </div>
   );
 }
+
+LoadMore.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default LoadMore;
