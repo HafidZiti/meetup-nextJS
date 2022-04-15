@@ -7,7 +7,7 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/recommended",
-    "prettier/recommended"
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {
