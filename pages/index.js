@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import PropTypes from "prop-types";
 import Head from "next/head";
 import MeetupList from "../components/meetups/MeetupList";
 import LoadMore from "../components/LoadMore";
@@ -111,5 +112,9 @@ export async function getStaticProps() {
   };
 }
 */
+
+HomePage.propTypes = {
+  meetups: PropTypes.array.isRequired,
+};
 
 export default HomePage;

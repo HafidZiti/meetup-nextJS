@@ -1,3 +1,27 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "ecmaVersion": 2015
+  },
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "no-console": "error",
+    // suppress errors for missing 'import React' in files
+    "react/react-in-jsx-scope": "off",
+    // allow jsx syntax in js files (for next.js project)
+    "prettier/prettier": "error"
+  }
 }
