@@ -39,6 +39,10 @@ function HomePage(props) {
           name="description"
           content="Browse a huge list of highly active NEXT.js meetups"
         />
+        <meta
+          name="google-site-verification"
+          content="dPxa_XQsSrGQZOHTj2pIU469-FHScq0hPoiGLLb1A6o"
+        />
       </Head>
       <MeetupList meetups={meetups} />
       {!isMax && <LoadMore onClick={clickHandle} isLoading={loading} />}
