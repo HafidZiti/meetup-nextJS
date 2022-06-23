@@ -10,3 +10,5 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "bot"
+    reviewers:
+      - "HafidZiti"
